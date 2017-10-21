@@ -1,0 +1,13 @@
+<button class="btn btn-primary"
+ (click)="alert = (alert === 'success' ? 'info' : 'success' )">Cambiar</button>
+<div [ngSwitch]="alert">
+    <div class="alert alert-success" role="alert" *ngSwitchCase="'success'">
+        <strong>Well done!</strong> You successfully read <a href="#" class="alert-link">this important alert message</a>.
+      </div>
+      <div class="alert alert-info" role="alert" *ngSwitchCase="'info'">
+        <strong>Heads up!</strong> This <a href="#" class="alert-link">alert needs your attention</a>, but it's not super important.
+      </div>
+      <div class="alert alert-warning" role="alert" *ngSwitchDefault>
+        <strong>Warning!</strong> Better check yourself, you're <a href="#" class="alert-link">not looking too good</a>.
+      </div>
+</div>
