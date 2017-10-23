@@ -1,0 +1,23 @@
+Pasar parametro de componente hijo a componente padre.
+
+1. Conozco dos formas, una que implica emitir desde el hijo un evento, y que el padre este escuchando para ejecutar algo.
+
+2. La segunda es inyectar el padre en el hijo, para poder llamar métodos del padre.
+
+Es bastante simple la segunda forma:
+
+1. Realizar el import del componente del padre en el componente hijo
+
+import { UsuarioComponent } from "./usuario.component"; 
+
+2. Inyectarlo en el constructor
+
+constructor( private usuarioComponent: UsuarioComponent ){ } 
+
+3. Te creas algún método que llame esta función por ejemplo:
+
+enviarParametro(){
+ 
+    this.usuarioComponent.datosDelHijo('hola');  // Tu parametro, puede ser objetos o lo que sea
+ 
+}
