@@ -9,5 +9,5 @@ export const USUARIO_ROUTES: Routes = [
     { path: 'nuevo', component: NuevoUsuarioComponent },
     { path: 'editar', component: EditarUsuarioComponent },
     { path: 'detallar', component: DetallarUsuarioComponent },
-    { path: '**', pathMatch: 'full', redirectTo: 'nuevo' }
+    { path: '**', pathMatch: 'full', redirectTo: 'editar' }
 ];
