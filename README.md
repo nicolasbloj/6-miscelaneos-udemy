@@ -1,27 +1,56 @@
 # Miscelaneos
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.4.2.
+*****RUTAS HIJAS
 
-## Development server
+Pasar parametro de componente hijo a componente padre.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+1. Conozco dos formas, una que implica emitir desde el hijo un evento, y que el padre este escuchando para ejecutar algo.
 
-## Code scaffolding
+2. La segunda es inyectar el padre en el hijo, para poder llamar métodos del padre.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Es bastante simple la segunda forma:
 
-## Build
+1. Realizar el import del componente del padre en el componente hijo
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+import { UsuarioComponent } from "./usuario.component"; 
 
-## Running unit tests
+2. Inyectarlo en el constructor
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+constructor( private usuarioComponent: UsuarioComponent ){ } 
 
-## Running end-to-end tests
+3. Te creas algún método que llame esta función por ejemplo:
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+enviarParametro(){
+ 
+    this.usuarioComponent.datosDelHijo('hola');  // Tu parametro, puede ser objetos o lo que sea
+ 
+}
 
-## Further help
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+
+*****CICLO DE VIDA
+
+Antes que todo se ejecuta el constructor .
+
+ngOnInit
+Se dispara tambien despues del primer ngOnChanges
+
+ngIf --> dispara ngOnDestroy
+
+Con ngOnDestroy podemos des subscribirnos de algun observador pendiente de cambio .
+
+---onChanges---
+
+ngOnChanges is not called every time a component property changes internally. It gets called when the databinding from the parent component pushes a new value into the child component. So if your parent component has
+
+<child-comp [name]="parentValue"></child-comp>
+When parentValue changes, the child component's @Input() name will change and that will trigger ngOnChanges
+
+Take a look at the docs:
+
+ngOnChanges
+
+Respond when Angular (re)sets data-bound input properties...Called before ngOnInit() and whenever one or more data-bound input properties change.
+To be notified when your form inputs change, in the long run the best approach is to learn Reactive Forms because they make you create the FormControl objects in your component and expose a very simple observable that emits every time the form value changes.
+
